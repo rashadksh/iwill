@@ -6,7 +6,6 @@
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
-        "sort-imports": "error",
         "@nx/enforce-module-boundaries": [
           "error",
           {
