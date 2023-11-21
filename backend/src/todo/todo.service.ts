@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 
+import { CreateTodoDTO } from '@iwill/lib/types';
+
 import { MongoTodoRepository } from '../infra/repositories/todo-repository';
 import { GetTodosUsecase } from './usecases/get-todos.usecase';
+import { CreateTodosUsecase } from './usecases/create-todo.usecase';
 
 @Injectable()
 export class TodoService {
@@ -10,5 +13,10 @@ export class TodoService {
   getTodos() {
     const getTodosUsecase = new GetTodosUsecase(this.todoRepository);
     return getTodosUsecase.execute();
+  }
+
+  createTodo(data: CreateTodoDTO) {
+    const createTodoUsecase = new CreateTodosUsecase(this.todoRepository);
+    return createTodoUsecase.execute(data);
   }
 }

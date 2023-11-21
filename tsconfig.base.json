@@ -20,6 +20,9 @@
     "paths": {
       "@iwill/lib/types": [
         "lib/types/src/index.ts"
+      ],
+      "@iwill/lib/validations": [
+        "lib/validations/src/index.ts"
       ]
     }
   },

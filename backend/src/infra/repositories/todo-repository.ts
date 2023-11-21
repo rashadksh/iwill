@@ -1,4 +1,4 @@
-import { Collection, Db } from 'mongodb';
+import { Collection, Db, ObjectId } from 'mongodb';
 import { Inject, Injectable } from '@nestjs/common';
 
 import { TodoEntity, TodoRepository } from '@iwill/lib/types';
@@ -15,5 +15,18 @@ export class MongoTodoRepository implements TodoRepository {
 
   getTodos(): Promise<TodoEntity[]> {
     return this.collection.find().toArray();
+  }
+
+  async insertOne(input: Omit<TodoEntity, '_id'>): Promise<TodoEntity> {
+    const { insertedId } = await this.collection.insertOne({
+      _id: new ObjectId().toHexString(),
+      ...input,
+    });
+
+    return this.getTodoById(insertedId);
+  }
+
+  getTodoById(id: string): Promise<TodoEntity> {
+    return this.collection.findOne({ _id: id });
   }
 }
