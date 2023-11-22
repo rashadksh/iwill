@@ -5,4 +5,5 @@ export interface TodoRepository {
   insertTodo(input: Omit<TodoEntity, '_id'>): Promise<TodoEntity>;
   getTodoById(id: string): Promise<TodoEntity>;
   updateTodoById(id: string, data: Partial<TodoEntity>): Promise<TodoEntity>;
+  deleteTodoById(id: string): Promise<void>;
 }

@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   Logger,
@@ -29,7 +30,7 @@ export class TodoController {
   async getTodos() {
     try {
       const todoEntities = await this.todoService.getTodos();
-      return { todos: TodoMapper.dbToJSONBulk(todoEntities) };
+      return TodoMapper.dbToJSONBulk(todoEntities);
     } catch (e) {
       Logger.error(`Failed getting todos - ${e}`);
       IWillHttpError.throwHttpErrorFromIWillError(e);
@@ -58,6 +59,18 @@ export class TodoController {
       return TodoMapper.dbToJSON(todo);
     } catch (e) {
       Logger.error(`Failed updating todo of id ${id} - ${e}`);
+      IWillHttpError.throwHttpErrorFromIWillError(e);
+    }
+  }
+
+  @Delete('/:id')
+  @UsePipes(new JoiValidationPipe(updateTodoValidationSchema))
+  @HttpCode(204)
+  async deleteTodo(@Param('id') id: string) {
+    try {
+      await this.todoService.deleteTodo(id);
+    } catch (e) {
+      Logger.error(`Failed deleting todo of id ${id} - ${e}`);
       IWillHttpError.throwHttpErrorFromIWillError(e);
     }
   }

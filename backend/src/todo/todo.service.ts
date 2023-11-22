@@ -6,6 +6,7 @@ import { MongoTodoRepository } from '../infra/repositories/todo-repository';
 import { GetTodosUsecase } from './usecases/get-todos.usecase';
 import { CreateTodosUsecase } from './usecases/create-todo.usecase';
 import { UpdateTodosUsecase } from './usecases/update-todo.usecase';
+import { DeleteTodosUsecase } from './usecases/delete-todo.usecase';
 
 @Injectable()
 export class TodoService {
@@ -24,5 +25,10 @@ export class TodoService {
   updateTodo(id: string, data: UpdateTodoDTO) {
     const updateTodoUsecase = new UpdateTodosUsecase(this.todoRepository);
     return updateTodoUsecase.execute({ id, ...data });
+  }
+
+  deleteTodo(id: string) {
+    const deleteTodoUsecase = new DeleteTodosUsecase(this.todoRepository);
+    return deleteTodoUsecase.execute(id);
   }
 }

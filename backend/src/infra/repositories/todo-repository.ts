@@ -43,4 +43,9 @@ export class MongoTodoRepository implements TodoRepository {
   getTodoById(id: string): Promise<TodoEntity> {
     return this.collection.findOne({ _id: id });
   }
+
+  deleteTodoById(id: string): Promise<void> {
+    this.collection.deleteOne({ _id: id });
+    return;
+  }
 }
