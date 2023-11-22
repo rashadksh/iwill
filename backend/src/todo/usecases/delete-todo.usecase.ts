@@ -1,6 +1,6 @@
 import { TodoRepository, Usecase } from '@iwill/lib/types';
 
-export class DeleteTodosUsecase implements Usecase<string, void> {
+export class DeleteTodosUsecase implements Usecase<string, Promise<void>> {
   constructor(private todoRepository: TodoRepository) {}
 
   async execute(id: string): Promise<void> {
