@@ -17,7 +17,7 @@ export class MongoTodoRepository implements TodoRepository {
     return this.collection.find().toArray();
   }
 
-  async insertOne(input: Omit<TodoEntity, '_id'>): Promise<TodoEntity> {
+  async insertTodo(input: Omit<TodoEntity, '_id'>): Promise<TodoEntity> {
     const { insertedId } = await this.collection.insertOne({
       _id: new ObjectId().toHexString(),
       ...input,
@@ -26,7 +26,10 @@ export class MongoTodoRepository implements TodoRepository {
     return this.getTodoById(insertedId);
   }
 
-  async updateOne(id: string, data: Partial<TodoEntity>): Promise<TodoEntity> {
+  async updateTodoById(
+    id: string,
+    data: Partial<TodoEntity>,
+  ): Promise<TodoEntity> {
     const { matchedCount } = await this.collection.updateOne(
       { _id: id },
       {

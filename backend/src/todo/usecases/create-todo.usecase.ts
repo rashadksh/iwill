@@ -11,7 +11,7 @@ export class CreateTodosUsecase
   constructor(private todoRepository: TodoRepository) {}
 
   execute(input: CreateTodoDTO): Promise<TodoEntity> {
-    const todo = this.todoRepository.insertOne({
+    const todo = this.todoRepository.insertTodo({
       title: input.title,
       description: input.description,
       completedAt: null,

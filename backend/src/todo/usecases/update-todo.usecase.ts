@@ -21,7 +21,7 @@ export class UpdateTodosUsecase
       data.completedAt = new Date();
     }
 
-    const todo = await this.todoRepository.updateOne(input.id, data);
+    const todo = await this.todoRepository.updateTodoById(input.id, data);
     return todo;
   }
 }
