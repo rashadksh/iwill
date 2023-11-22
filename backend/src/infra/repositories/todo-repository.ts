@@ -26,6 +26,21 @@ export class MongoTodoRepository implements TodoRepository {
     return this.getTodoById(insertedId);
   }
 
+  async updateOne(id: string, data: Partial<TodoEntity>): Promise<TodoEntity> {
+    const { matchedCount } = await this.collection.updateOne(
+      { _id: id },
+      {
+        $set: data,
+      },
+    );
+
+    if (matchedCount > 0) {
+      return this.getTodoById(id);
+    }
+
+    return null;
+  }
+
   getTodoById(id: string): Promise<TodoEntity> {
     return this.collection.findOne({ _id: id });
   }

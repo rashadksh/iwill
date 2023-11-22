@@ -1,8 +1,8 @@
 import { FactoryProvider, Logger } from '@nestjs/common';
 import { MongoClient, ServerApiVersion } from 'mongodb';
 
-import { ConfigService } from './config.service';
 import { DI_VARIABLES } from '../di';
+import { ConfigService } from './config.service';
 
 const provider: FactoryProvider = {
   provide: DI_VARIABLES.DB,
