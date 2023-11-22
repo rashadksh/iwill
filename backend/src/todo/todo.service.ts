@@ -22,7 +22,7 @@ export class TodoService {
   }
 
   updateTodo(id: string, data: UpdateTodoDTO) {
-    const createTodoUsecase = new UpdateTodosUsecase(this.todoRepository);
-    return createTodoUsecase.execute({ id, ...data });
+    const updateTodoUsecase = new UpdateTodosUsecase(this.todoRepository);
+    return updateTodoUsecase.execute({ id, ...data });
   }
 }
